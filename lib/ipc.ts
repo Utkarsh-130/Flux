@@ -1,67 +1,53 @@
-declare global {
-  interface Window {
-    electronAPI?: {
-      runScraper: (channels: string[], keywords: any) => void;
-      stopScraper: () => void;
-      onScraperProgress: (callback: (data: any) => void) => void;
-      onScraperJobFound: (callback: (job: any) => void) => void;
-      onScraperComplete: (callback: (result: any) => void) => void;
-      onScraperError: (callback: (error: any) => void) => void;
-      pythonRequest: (data: any) => Promise<any>;
-      isDev: () => boolean;
-    };
-  }
-}
+import { invoke } from '@tauri-apps/api/core';
+import { listen, UnlistenFn } from '@tauri-apps/api/event';
 
 export const ipc = {
-  runScraper: (channels: string[], keywords: Record<string, any>) => {
-    if (typeof window !== 'undefined' && window.electronAPI) {
-      window.electronAPI.runScraper(channels, keywords);
+  runScraper: async (channels: string[], keywords: Record<string, any>) => {
+    if (typeof window !== 'undefined') {
+      await invoke('run_scraper', { channels, keywords });
     }
   },
 
-  stopScraper: () => {
-    if (typeof window !== 'undefined' && window.electronAPI) {
-      window.electronAPI.stopScraper();
+  stopScraper: async () => {
+    if (typeof window !== 'undefined') {
+      await invoke('stop_scraper');
     }
   },
 
-  onScraperProgress: (callback: (data: any) => void) => {
-    if (typeof window !== 'undefined' && window.electronAPI) {
-      window.electronAPI.onScraperProgress(callback);
+  onScraperProgress: async (callback: (data: any) => void): Promise<UnlistenFn | undefined> => {
+    if (typeof window !== 'undefined') {
+      return await listen('scraper:progress', (event) => callback(event.payload));
     }
   },
 
-  onScraperJobFound: (callback: (job: any) => void) => {
-    if (typeof window !== 'undefined' && window.electronAPI) {
-      window.electronAPI.onScraperJobFound(callback);
+  onScraperJobFound: async (callback: (job: any) => void): Promise<UnlistenFn | undefined> => {
+    if (typeof window !== 'undefined') {
+      return await listen('scraper:jobFound', (event) => callback(event.payload));
     }
   },
 
-  onScraperComplete: (callback: (result: any) => void) => {
-    if (typeof window !== 'undefined' && window.electronAPI) {
-      window.electronAPI.onScraperComplete(callback);
+  onScraperComplete: async (callback: (result: any) => void): Promise<UnlistenFn | undefined> => {
+    if (typeof window !== 'undefined') {
+      return await listen('scraper:complete', (event) => callback(event.payload));
     }
   },
 
-  onScraperError: (callback: (error: any) => void) => {
-    if (typeof window !== 'undefined' && window.electronAPI) {
-      window.electronAPI.onScraperError(callback);
+  onScraperError: async (callback: (error: any) => void): Promise<UnlistenFn | undefined> => {
+    if (typeof window !== 'undefined') {
+      return await listen('scraper:error', (event) => callback(event.payload));
     }
   },
 
   pythonRequest: async (data: Record<string, any>) => {
-    if (typeof window !== 'undefined' && window.electronAPI) {
-      return await window.electronAPI.pythonRequest(data);
+    if (typeof window !== 'undefined') {
+      return await invoke('python_request', { data });
     }
     return null;
   },
 
   isDev: () => {
-    if (typeof window !== 'undefined' && window.electronAPI) {
-      return window.electronAPI.isDev();
-    }
-    return false;
+    // In Tauri, we can check process.env or just assume false for now unless we implement a dev check command
+    return process.env.NODE_ENV === 'development';
   },
 };
 

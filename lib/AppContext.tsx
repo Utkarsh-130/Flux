@@ -99,7 +99,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       deadline: 'N/A',
       channel: 'LMTPlacements',
       snippet: 'Company: Harman Role: Associate Engineer Location: Bangalore Apply at: https://jobsearch.harman.com...',
-      dateString: '2026-06-12',
+      dateString: new Date().toISOString().split('T')[0],
       requiredSkills: ['React', 'JavaScript', 'CSS'],
     },
     {
@@ -113,7 +113,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       deadline: 'N/A',
       channel: 'LMTPlacements',
       snippet: 'Company: ETG Role: Graduate Software Trainee Location: Bengaluru Salary: 6+ LPA Apply at: https://...',
-      dateString: '2026-06-16',
+      dateString: new Date().toISOString().split('T')[0],
       requiredSkills: ['React', 'TypeScript', 'Java'],
     },
     {
@@ -127,7 +127,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       deadline: 'N/A',
       channel: 'LMTPlacements',
       snippet: 'Company: Avua Role: Junior Software Developer Location: Remote Salary: 5+ LPA Apply at: https://...',
-      dateString: '2026-06-27',
+      dateString: new Date().toISOString().split('T')[0],
       requiredSkills: ['Python', 'Docker', 'AWS'],
     },
   ];
@@ -146,7 +146,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         }
       }
     } catch (e) {
-      console.error(e);
+      console.warn('Backend not ready yet, retrying in next cycle...');
     } finally {
       setIsLoadingJobs(false);
     }
@@ -181,7 +181,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
           }
         }
       } catch (e) {
-        console.error('Failed to check auth status', e);
+        console.warn('Backend not ready yet for auth check, retrying in next cycle...');
       }
     };
     checkAuthStatus();
