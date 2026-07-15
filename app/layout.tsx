@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { Sidebar } from '@/components/sidebar'
 import { AppProvider } from '@/lib/AppContext'
+import { ThemeProvider } from '@/components/theme-provider'
 import { TelegramSettingsModal } from '@/components/TelegramSettingsModal'
 import { SearchOverlay } from '@/components/SearchOverlay'
 import { TitleBar } from '@/components/TitleBar'
@@ -29,9 +30,15 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="font-sans antialiased bg-[#dde3ea] text-[#121315] flex flex-col h-screen overflow-hidden">
-        <AppProvider>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`} suppressHydrationWarning>
+      <body className="font-sans antialiased bg-white dark:bg-[#121315] text-text-primary flex flex-col h-screen overflow-hidden">
+        <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+        >
+          <AppProvider>
           <div className="fixed top-0 left-0 right-0 h-[30px] z-50">
             <TitleBar />
           </div>
@@ -44,6 +51,7 @@ export default function RootLayout({
           <TelegramSettingsModal />
           <SearchOverlay />
         </AppProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
