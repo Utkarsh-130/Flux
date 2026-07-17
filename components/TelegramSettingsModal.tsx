@@ -88,23 +88,23 @@ export function TelegramSettingsModal() {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-[100] p-4">
-      <div className="bg-white rounded-[32px] w-full max-w-[420px] p-8 shadow-xl border border-gray-100/50 flex flex-col gap-6 animate-in fade-in zoom-in-95 duration-200">
+    <div className="fixed inset-0 bg-black/40 backdrop-blur-md flex items-center justify-center z-[100] p-4">
+      <div className="bg-white dark:bg-[#18191c] rounded-[32px] w-full max-w-[420px] p-8 shadow-xl border border-border-faint flex flex-col gap-6 animate-in fade-in zoom-in-95 duration-200">
         <div className="flex justify-between items-center pb-2">
           <div className="flex items-center gap-3">
             <Settings className="w-6 h-6 text-purple-400" />
-            <h3 className="text-sm font-extrabold text-[#1a253c] tracking-wider uppercase">Telegram Settings</h3>
+            <h3 className="text-sm font-extrabold text-text-primary tracking-wider uppercase">Telegram Settings</h3>
           </div>
           <button
             onClick={() => setShowSettingsModal(false)}
-            className="w-8 h-8 rounded-full border border-gray-100 flex items-center justify-center text-blue-600 hover:bg-gray-50 shadow-sm cursor-pointer"
+            className="w-8 h-8 rounded-full border border-border-subtle flex items-center justify-center text-blue-600 hover:bg-surface-hover shadow-[0_4px_24px_rgba(0,0,0,0.4)] cursor-pointer"
           >
             <X className="w-4 h-4 stroke-[3px]" />
           </button>
         </div>
 
         <div className="space-y-3">
-          <h4 className="text-[10px] font-extrabold text-gray-400 tracking-wider uppercase">Telegram Session</h4>
+          <h4 className="text-[10px] font-extrabold text-text-secondary tracking-wider uppercase">Telegram Session</h4>
           
           {isTelegramLoggedIn ? (
             <div className="flex items-center justify-between bg-emerald-50/50 border border-emerald-100 p-4 rounded-2xl">
@@ -114,13 +114,13 @@ export function TelegramSettingsModal() {
               </div>
               <button
                 onClick={() => setIsTelegramLoggedIn(false)}
-                className="bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 font-extrabold text-xs px-4 py-2 rounded-full cursor-pointer transition-colors shadow-xs"
+                className="bg-white dark:bg-[#18191c] border border-border-medium hover:bg-surface-hover text-text-tertiary font-extrabold text-xs px-4 py-2 rounded-full cursor-pointer transition-colors shadow-xs"
               >
                 Log Out
               </button>
             </div>
           ) : (
-            <div className="bg-gray-50/50 border border-gray-100 p-5 rounded-2xl space-y-4">
+            <div className="bg-gray-50 dark:bg-white/10 border border-border-subtle p-5 rounded-2xl space-y-4">
               {step === 'phone' ? (
                 <div className="space-y-3">
                   <input
@@ -128,7 +128,7 @@ export function TelegramSettingsModal() {
                     placeholder="Phone number e.g. +12345"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-xs font-bold outline-none"
+                    className="w-full bg-white dark:bg-[#18191c] border border-border-medium rounded-xl px-4 py-3 text-xs font-bold outline-none"
                   />
                   <button
                     onClick={handleSendOtp}
@@ -141,18 +141,18 @@ export function TelegramSettingsModal() {
                 </div>
               ) : (
                 <div className="space-y-3">
-                  <p className="text-[10px] font-bold text-gray-400">Enter code sent to {phone}</p>
+                  <p className="text-[10px] font-bold text-text-secondary">Enter code sent to {phone}</p>
                   <input
                     type="text"
                     placeholder="Verification code (e.g. 123456)"
                     value={otp}
                     onChange={(e) => setOtp(e.target.value)}
-                    className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-xs font-bold text-center tracking-widest outline-none"
+                    className="w-full bg-white dark:bg-[#18191c] border border-border-medium rounded-xl px-4 py-3 text-xs font-bold text-center tracking-widest outline-none"
                   />
                   <div className="flex gap-2">
                     <button
                       onClick={() => setStep('phone')}
-                      className="flex-1 bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 text-xs font-black py-3 rounded-full cursor-pointer"
+                      className="flex-1 bg-white dark:bg-[#18191c] border border-border-medium text-text-tertiary hover:bg-surface-hover text-xs font-black py-3 rounded-full cursor-pointer"
                     >
                       Back
                     </button>
@@ -179,7 +179,7 @@ export function TelegramSettingsModal() {
         </div>
 
         <div className="space-y-4">
-          <h4 className="text-[10px] font-extrabold text-gray-400 tracking-wider uppercase">Target Channels</h4>
+          <h4 className="text-[10px] font-extrabold text-text-secondary tracking-wider uppercase">Target Channels</h4>
           
           <div className="flex gap-2">
             <input
@@ -187,12 +187,12 @@ export function TelegramSettingsModal() {
               placeholder="Channel username"
               value={newChannel}
               onChange={(e) => setNewChannel(e.target.value)}
-              className="flex-1 bg-gray-50/50 border border-gray-200 rounded-2xl px-5 py-3.5 text-sm text-gray-800 outline-none focus:border-gray-300"
+              className="flex-1 bg-gray-50 dark:bg-white/10 border border-border-medium rounded-2xl px-5 py-3.5 text-sm text-text-quaternary outline-none focus:border-gray-300"
               onKeyDown={(e) => e.key === 'Enter' && handleAdd()}
             />
             <button
               onClick={handleAdd}
-              className="bg-[#121315] hover:bg-[#202226] text-white w-12 h-12 rounded-2xl flex items-center justify-center transition-colors shadow-sm text-lg font-bold"
+              className="bg-[#0c0d0e] dark:bg-[#121315] hover:bg-[#202226] text-white w-12 h-12 rounded-2xl flex items-center justify-center transition-colors shadow-[0_4px_24px_rgba(0,0,0,0.4)] text-lg font-bold"
             >
               +
             </button>
@@ -202,12 +202,12 @@ export function TelegramSettingsModal() {
             {channels.map((ch) => (
               <div
                 key={ch.id}
-                className="flex items-center justify-between p-4 bg-gray-50/50 hover:bg-gray-100/50 rounded-2xl border border-gray-100/80 transition-colors"
+                className="flex items-center justify-between p-4 bg-gray-50 dark:bg-white/10 hover:bg-surface-muted rounded-2xl border border-gray-100 dark:border-white/20 transition-colors"
               >
-                <span className="text-sm font-extrabold text-gray-800">{ch.name}</span>
+                <span className="text-sm font-extrabold text-text-quaternary">{ch.name}</span>
                 <button
                   onClick={() => removeChannel(ch.id)}
-                  className="w-8 h-8 rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 transition-colors"
+                  className="w-8 h-8 rounded-full flex items-center justify-center text-text-secondary hover:text-red-500 transition-colors"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
@@ -217,7 +217,7 @@ export function TelegramSettingsModal() {
 
           <button
             onClick={clearChannels}
-            className="w-full bg-white hover:bg-gray-50 text-gray-700 font-extrabold py-3.5 rounded-full border border-gray-200 transition-colors shadow-sm text-xs uppercase tracking-wider cursor-pointer"
+            className="w-full bg-white dark:bg-[#18191c] hover:bg-surface-hover text-text-tertiary font-extrabold py-3.5 rounded-full border border-border-medium transition-colors shadow-[0_4px_24px_rgba(0,0,0,0.4)] text-xs uppercase tracking-wider cursor-pointer"
           >
             Clear all channels
           </button>

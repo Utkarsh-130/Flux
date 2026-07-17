@@ -82,7 +82,7 @@ export default function LoginPage() {
             <span className="text-2xl font-bold text-black">⚡</span>
           </div>
           <h1 className="text-4xl font-bold text-white mb-2">flux</h1>
-          <p className="text-gray-400">Telegram Job Scraper</p>
+          <p className="text-text-secondary">Telegram Job Scraper</p>
         </div>
 
         {/* Form Card */}
@@ -165,7 +165,7 @@ export default function LoginPage() {
                     setError('');
                   }}
                   disabled={loading}
-                  className="flex-1 h-12 border-gray-700 text-gray-300 hover:text-white"
+                  className="flex-1 h-12 border-gray-700 text-text-tertiary hover:text-white"
                 >
                   Back
                 </Button>
@@ -187,7 +187,7 @@ export default function LoginPage() {
             </form>
           )}
 
-          <p className="text-xs text-gray-600 text-center mt-6">
+          <p className="text-xs text-text-secondary text-center mt-6">
             We never store your phone number or OTP
           </p>
         </div>

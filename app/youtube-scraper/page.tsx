@@ -108,20 +108,20 @@ export default function YouTubeScraperPage() {
     <div className="flex flex-col gap-6">
       <Header title="YouTube Scraper Settings" subtitle="Extract links from YouTube videos or channels" />
 
-      <div className="bg-white rounded-[32px] p-8 shadow-sm border border-gray-100/50">
+      <div className="bg-white dark:bg-[#18191c] rounded-[32px] p-8 shadow-[0_4px_24px_rgba(0,0,0,0.4)] border border-border-faint">
         
         <div className="max-w-3xl">
           <div>
-            <label className="text-xs font-bold text-gray-700 block mb-2 uppercase tracking-wider">
+            <label className="text-xs font-bold text-text-tertiary block mb-2 uppercase tracking-wider">
               YouTube Video or Channel URLs
             </label>
             <textarea
               value={youtubeChannels}
               onChange={(e) => setYoutubeChannels(e.target.value)}
               placeholder="e.g. https://www.youtube.com/watch?v=dQw4w9WgXcQ, https://www.youtube.com/@NetworkChuck"
-              className="w-full bg-gray-50/50 border border-gray-200 rounded-2xl p-4 text-sm text-gray-800 outline-none focus:border-gray-300 resize-none h-32 transition-all"
+              className="w-full bg-gray-50 dark:bg-white/10 border border-border-medium rounded-2xl p-4 text-sm text-text-quaternary outline-none focus:border-gray-300 resize-none h-32 transition-all"
             />
-            <p className="text-[10px] text-gray-400 mt-1 ml-1 font-semibold">Separate multiple URLs with commas. You can provide direct video URLs or channel URLs (will fetch up to 10 latest videos).</p>
+            <p className="text-[10px] text-text-secondary mt-1 ml-1 font-semibold">Separate multiple URLs with commas. You can provide direct video URLs or channel URLs (will fetch up to 10 latest videos).</p>
           </div>
         </div>
       </div>
@@ -130,18 +130,18 @@ export default function YouTubeScraperPage() {
         <button
           onClick={handleStartScraper}
           disabled={isRunning}
-          className="w-full bg-[#9ef01a] hover:bg-[#8ae010] text-[#121315] font-extrabold py-5 rounded-3xl transition-all shadow-sm tracking-wide text-sm flex items-center justify-center gap-2"
+          className="w-full bg-[#9ef01a] hover:bg-[#8ae010] text-[#121315] font-extrabold py-5 rounded-3xl transition-all shadow-[0_4px_24px_rgba(0,0,0,0.4)] tracking-wide text-sm flex items-center justify-center gap-2"
         >
           <Play className="w-4 h-4 fill-current text-[#121315]" />
           {isRunning ? 'Scraping...' : 'Start Scraper run'}
         </button>
 
         {logs.length > 0 && (
-          <div className="bg-white rounded-[32px] p-8 shadow-sm border border-gray-100/50">
-            <h3 className="text-xs font-extrabold text-gray-400 tracking-wider uppercase mb-4">Scraper Outputs</h3>
-            <div className="bg-gray-950 text-gray-200 font-mono text-xs p-5 rounded-2xl max-h-60 overflow-y-auto space-y-2 border border-gray-900 shadow-inner">
+          <div className="bg-white dark:bg-[#18191c] rounded-[32px] p-8 shadow-[0_4px_24px_rgba(0,0,0,0.4)] border border-border-faint">
+            <h3 className="text-xs font-extrabold text-text-secondary tracking-wider uppercase mb-4">Scraper Outputs</h3>
+            <div className="bg-gray-950 text-text-quaternary font-mono text-xs p-5 rounded-2xl max-h-60 overflow-y-auto space-y-2 border border-gray-900 shadow-inner">
               {logs.map((log, idx) => (
-                <div key={idx} className={log.type === 'error' ? 'text-rose-400 font-bold' : log.type === 'success' ? 'text-emerald-400 font-bold' : 'text-gray-300'}>
+                <div key={idx} className={log.type === 'error' ? 'text-rose-400 font-bold' : log.type === 'success' ? 'text-emerald-400 font-bold' : 'text-text-tertiary'}>
                   {log.message}
                 </div>
               ))}
@@ -150,8 +150,8 @@ export default function YouTubeScraperPage() {
         )}
 
         {links.length > 0 && (
-          <div className="bg-white rounded-[32px] p-8 shadow-sm border border-gray-100/50 mt-6">
-            <h3 className="text-xs font-extrabold text-gray-400 tracking-wider uppercase mb-6 flex items-center justify-between">
+          <div className="bg-white dark:bg-[#18191c] rounded-[32px] p-8 shadow-[0_4px_24px_rgba(0,0,0,0.4)] border border-border-faint mt-6">
+            <h3 className="text-xs font-extrabold text-text-secondary tracking-wider uppercase mb-6 flex items-center justify-between">
               Extracted Links ({links.length})
               <button 
                 onClick={async () => {
@@ -171,19 +171,19 @@ export default function YouTubeScraperPage() {
             </h3>
             <div className="space-y-4">
               {links.map((link) => (
-                <div key={link.id} className="border border-gray-100 rounded-2xl p-5 hover:shadow-md transition-shadow">
+                <div key={link.id} className="border border-border-subtle rounded-2xl p-5 hover:shadow-md transition-shadow">
                   <div className="flex justify-between items-start mb-2">
-                    <h4 className="font-extrabold text-sm text-[#1a253c]">{link.video_title}</h4>
-                    <span className="bg-gray-100 text-gray-600 text-[10px] font-bold px-2 py-0.5 rounded-md">
+                    <h4 className="font-extrabold text-sm text-text-primary">{link.video_title}</h4>
+                    <span className="bg-surface-muted text-text-secondary text-[10px] font-bold px-2 py-0.5 rounded-md">
                       @{link.channel_name}
                     </span>
                   </div>
-                  <p className="text-xs text-gray-500 font-medium whitespace-pre-wrap bg-gray-50 p-3 rounded-xl border border-gray-100 mb-3">
+                  <p className="text-xs text-gray-500 font-medium whitespace-pre-wrap bg-surface-hover p-3 rounded-xl border border-border-subtle mb-3">
                     {link.context}
                   </p>
                   <div className="flex items-center justify-between gap-4">
-                    <span className="text-xs font-medium text-gray-400 truncate flex-1">{link.link_url}</span>
-                    <a href={link.link_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-1.5 bg-[#121315] hover:bg-[#2a3654] text-white px-5 py-2.5 rounded-xl text-xs font-bold transition-all shadow-sm shrink-0">
+                    <span className="text-xs font-medium text-text-secondary truncate flex-1">{link.link_url}</span>
+                    <a href={link.link_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-1.5 bg-[#0c0d0e] dark:bg-[#121315] hover:bg-[#2a3654] text-white px-5 py-2.5 rounded-xl text-xs font-bold transition-all shadow-[0_4px_24px_rgba(0,0,0,0.4)] shrink-0">
                       Go <ExternalLink className="w-3.5 h-3.5" />
                     </a>
                   </div>
