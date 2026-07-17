@@ -1,25 +1,28 @@
 # Flux <img width="34" height="34" alt="icon" src="https://github.com/user-attachments/assets/291e7da9-7958-4852-b355-99039fe567b2" />
 
 
-Flux is a custom desktop client made using nextron designed to automatically filter, extract, and track job listings directly from target Telegram channels. Built, it cuts through the noise of busy Telegram groups to bring relevant job opportunities straight to your dashboard.
+Flux is a custom desktop client made using nextron designed to automatically filter, extract, and track opportunities and certification programs directly from target Telegram channels. Built, it cuts through the noise of busy Telegram groups to bring relevant job opportunities straight to your dashboard.
 
-<img width="1901" height="980" alt="Screenshot 2026-06-02 025203" src="https://github.com/user-attachments/assets/30d42d23-4c2e-47ae-a29e-d092b74ddaea" />
+<img width="2558" height="1386" alt="Screenshot 2026-07-14 162637" src="https://github.com/user-attachments/assets/bdc6165a-c406-4d0d-820b-b2afb82e3018" />
+
 
 ##  Features
+* **10x Smaller App Size:** By dropping the bundled Chromium environment and relying on the native webview provided by Tauri, the final installation size is a fraction of what it used to be. It downloads faster and takes up barely any disk space.
 
+* **Zero Memory Overflows:** Running a background parser used to cause memory issues over time. Thanks to the strict memory management of Rust under the hood, those overflows are completely gone. You can leave Flux syncing all day without it slowing down your machine.
 * **Automated Tracking:** Connects to your target Telegram channels and continuously listens for new messages.
 * **Smart Filtering:** Parses incoming messages to identify and extract job listings, removing spam and irrelevant chatter.
 * **Desktop-Native:** Packaged as an Electron app for a seamless desktop experience on Windows, macOS, and Linux.
 * **Modern UI:** A clean, responsive dashboard built with Next.js and Tailwind CSS to easily read, sort, and apply for jobs.
 * **Dedicated Python Engine:** Utilizes a robust Python backend for reliable Telegram API using telethon interactions and user session management.
 
-  <img width="1916" height="1011" alt="Screenshot 2026-06-02 020019" src="https://github.com/user-attachments/assets/f20f2306-0097-4f0e-9d33-3cd413c6e496" />
+<img width="2541" height="1377" alt="Screenshot 2026-07-14 161903" src="https://github.com/user-attachments/assets/54061195-3ccb-41aa-91f5-4ff4b6808b74" />
 
 
 ## Tech Stack
 
 * **Frontend:** [Next.js](https://nextjs.org/) (App Router), React, TypeScript, Tailwind CSS, shadcn/ui
-* **Desktop Framework:** [Electron](https://www.electronjs.org/)
+* **Desktop Framework:** [Tauri](https://tauri.app/) (Powered by Rust)
 * **Backend Data Engine:** Python (Handles Telegram client functionality)
 * **Package Management:** npm / pip
 
@@ -29,20 +32,21 @@ Flux is a custom desktop client made using nextron designed to automatically fil
 Flux/
 ├── app/                 # Next.js App Router pages and frontend layouts
 ├── components/          # Reusable React components (shadcn/ui)
-├── electron/            # Electron main process and preload scripts
+├── src-tauri/           # Tauri main process and Rust configurations
 ├── hooks/               # Custom React hooks
 ├── lib/                 # Utility functions and shared logic
-├── python-backend/      # Python scripts for Telegram API and job filtering
+├── python-backend/      # Python scripts for Telegram API and opportunity filtering
 ├── styles/              # Global CSS and Tailwind configuration
 ├── app.py               # Main entry point for the Python backend service
 └── package.json         # Node dependencies and project scripts
-
  Getting Started
 Prerequisites
 
     Node.js (v18+)
 
     Python (v3.8+)
+
+    Rust
 
     Your Telegram API credentials (api_id and api_hash) from my.telegram.org.
 
